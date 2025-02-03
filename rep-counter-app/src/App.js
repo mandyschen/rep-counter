@@ -1,9 +1,21 @@
 import './styles.css';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 
 const loadExercises = () => {
   const savedExercises = localStorage.getItem('exercises');
-  return savedExercises ? JSON.parse(savedExercises) : [];
+  if (savedExercises) {
+    return JSON.parse(savedExercises);
+  } else {
+    return [
+      {
+        exerciseName: 'Smile Exercise',
+        reps: 10,
+        time: 30,
+        sets: 3,
+        breakTime: 60,
+      },
+    ];
+  }
 };
 
 const saveExercises = (exercises) => {
@@ -27,8 +39,11 @@ function App() {
   const [isExerciseComplete, setIsExerciseComplete] = useState(false);
   const [isMuted, setIsMuted] = useState(true);
 
-  const shortBeep = new Audio('/audio/short-beep-tone-47916.mp3');
-  const longBeep = new Audio('/audio/censor-beep-88052.mp3')
+  // const shortBeep = new Audio(`${process.env.PUBLIC_URL}/audio/short-beep-tone-47916.mp3`);
+  // const longBeep = new Audio(`${process.env.PUBLIC_URL}/audio/censor-beep-88052.mp3`);
+
+  const shortBeep = useMemo(() => new Audio(`${process.env.PUBLIC_URL}/audio/short-beep-tone-47916.mp3`), []);
+  const longBeep = useMemo(() => new Audio(`${process.env.PUBLIC_URL}/audio/censor-beep-88052.mp3`), []);
 
   const addExercise = () => {
     if (exerciseName && reps && time && sets && breakTime) {
