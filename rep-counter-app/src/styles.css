@@ -19,7 +19,7 @@ body {
   }
   
   button {
-    background-color: #1973bd;
+    background-color: #3287e8;
     color: white;
     border: none;
     padding: 10px;
@@ -27,7 +27,7 @@ body {
   }
   
   button:hover {
-    background-color: #114b7a;
+    background-color: #2d5485;
   }
 
   ul {
